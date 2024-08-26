@@ -1,0 +1,14 @@
+{
+  "name": "log-watcher",
+  "version": "1.0.0",
+  "description": "Similar to tail -f command in UNIX",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Riteek Rakesh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
