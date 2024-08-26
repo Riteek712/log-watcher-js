@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="end">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Log Viewer</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            #log {
+                white-space: pre-wrap;
+                overflow-y: scroll;
+                height: 100vh;
+                padding: 20px;
+                background: #f4f4f4;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>LOGS</h1>
+        <div id="log"></div>
+        <script>
+            const logDiv = document.getElementById('log');
+            const ws = new WebSocket('ws://localhost:3000');
+            
+            ws.onmessage = (event) => {
+                // logDiv.textContent = ""
+                logDiv.textContent += event.data;
+                
+                logDiv.scrollTop = logDiv.scrollHeight;
+            };
+        </script>
+    </body>
+
+
+</html>
