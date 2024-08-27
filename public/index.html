@@ -14,7 +14,7 @@
             #log {
                 white-space: pre-wrap;
                 overflow-y: scroll;
-                height: 100vh;
+                /* height: 100vh; */
                 padding: 20px;
                 background: #f4f4f4;
             }
@@ -25,14 +25,22 @@
         <div id="log"></div>
         <script>
             const logDiv = document.getElementById('log');
-            const ws = new WebSocket('ws://localhost:3000');
-            
-            ws.onmessage = (event) => {
-                // logDiv.textContent = ""
-                logDiv.textContent += event.data;
-                
-                logDiv.scrollTop = logDiv.scrollHeight;
-            };
+        const maxLines = 10;  // Maximum number of lines to display
+        
+        const ws = new WebSocket('ws://localhost:3000');
+        
+        ws.onmessage = (event) => {
+            let lines = logDiv.textContent.split('\n');
+            lines.push(event.data.trim());
+
+            // Keep only the last 10 lines
+            if (lines.length > maxLines) {
+                lines = lines.slice(-maxLines);
+            }
+
+            logDiv.textContent = lines.join('\n');
+            logDiv.scrollTop = logDiv.scrollHeight;
+        };
         </script>
     </body>
 
